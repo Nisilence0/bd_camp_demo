@@ -2,9 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"path/filepath"
+
+	"github.com/gin-gonic/gin"
 )
 
 type VideoListResponse struct {
@@ -13,11 +14,12 @@ type VideoListResponse struct {
 }
 
 // Publish check token then save upload file to public directory
+// 上传保存视频文件到公共文件夹只需要检查token是否合法
 func Publish(c *gin.Context) {
 	token := c.PostForm("token")
 
 	if _, exist := usersLoginInfo[token]; !exist {
-		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "User doesn't exist"})
+		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "User doesn't login"})
 		return
 	}
 
@@ -49,6 +51,8 @@ func Publish(c *gin.Context) {
 }
 
 // PublishList all users have same publish video list
+// 发布列表所有用户都有相同的发布视频列表
+
 func PublishList(c *gin.Context) {
 	c.JSON(http.StatusOK, VideoListResponse{
 		Response: Response{

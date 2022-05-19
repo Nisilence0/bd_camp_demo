@@ -13,6 +13,7 @@ type FeedResponse struct {
 }
 
 // Feed same demo video list for every request
+// 视频流相同项目视频列表的每一个请求
 func Feed(c *gin.Context) {
 	c.JSON(http.StatusOK, FeedResponse{
 		Response:  Response{StatusCode: 0},

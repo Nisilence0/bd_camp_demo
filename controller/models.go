@@ -1,10 +1,10 @@
-package models
+package controller
 
 import (
 	"fmt"
 	"log"
-	"pkg/settings"
 
+	"github.com/RaymondCode/simple-demo/pkg/settings"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -45,8 +45,4 @@ func Setup() {
 	sqlDB.SetMaxIdleConns(settings.DatabaseSetting.MaxIdleConn)
 	sqlDB.SetMaxOpenConns(settings.DatabaseSetting.MaxOpenConn)
 
-	err = db.AutoMigrate(&User{})
-	if err != nil {
-		log.Fatalf("models.Setup err: %v", err)
-	}
 }

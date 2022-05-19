@@ -1,11 +1,14 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // FavoriteAction no practical effect, just check if token is valid
+// FavoriteAction无实际效果，只需检查令牌是否有效
+
 func FavoriteAction(c *gin.Context) {
 	token := c.Query("token")
 
@@ -17,6 +20,7 @@ func FavoriteAction(c *gin.Context) {
 }
 
 // FavoriteList all users have same favorite video list
+// Favoritelist 所有用户都有相同的喜爱视频列表
 func FavoriteList(c *gin.Context) {
 	c.JSON(http.StatusOK, VideoListResponse{
 		Response: Response{

@@ -1,10 +1,21 @@
 package main
 
 import (
+	"github.com/RaymondCode/simple-demo/controller"
+	"github.com/RaymondCode/simple-demo/pkg/settings"
 	"github.com/gin-gonic/gin"
 )
 
+type Response struct {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg,omitempty"`
+}
+
+func init() {
+	settings.Setup()
+}
 func main() {
+	controller.Setup()
 	r := gin.Default()
 
 	initRouter(r)

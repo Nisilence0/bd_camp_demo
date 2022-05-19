@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type CommentListResponse struct {
@@ -11,6 +12,7 @@ type CommentListResponse struct {
 }
 
 // CommentAction no practical effect, just check if token is valid
+//CommentAction--没有实际效果，只需检查令牌是否有效
 func CommentAction(c *gin.Context) {
 	token := c.Query("token")
 
@@ -22,6 +24,7 @@ func CommentAction(c *gin.Context) {
 }
 
 // CommentList all videos have same demo comment list
+// 所有视频都有相同的演示评论列表
 func CommentList(c *gin.Context) {
 	c.JSON(http.StatusOK, CommentListResponse{
 		Response:    Response{StatusCode: 0},
