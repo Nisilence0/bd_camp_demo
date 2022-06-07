@@ -45,4 +45,11 @@ func Setup() {
 	sqlDB.SetMaxIdleConns(settings.DatabaseSetting.MaxIdleConn)
 	sqlDB.SetMaxOpenConns(settings.DatabaseSetting.MaxOpenConn)
 
+	// var video []Video
+
+	// db.Preload(clause.Associations).Find(&video)
+
+	// fmt.Printf("%+v\n", video)
+
+	// db.AutoMigrate(&Video{})
 }

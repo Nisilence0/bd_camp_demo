@@ -7,7 +7,8 @@ type Response struct {
 
 type Video struct {
 	Id            int64  `json:"id,omitempty" gorm:"primary_key"`
-	Author        User   `json:"author" gorm:"foreignKey:id;references:id;"`
+	UserId        int64  `json:"user_id,omitempty" gorm:"primary_key"`
+	Author        User   `json:"author,omitempty" gorm:"foreignKey:UserId;references:Id;"`
 	PlayUrl       string `json:"play_url,omitempty"`
 	CoverUrl      string `json:"cover_url,omitempty"`
 	FavoriteCount int64  `json:"favorite_count,omitempty"`
@@ -28,17 +29,16 @@ type User struct {
 	IsFollow      bool   `json:"is_follow,omitempty"`
 }
 type UserVideoFavorite struct {
-	VideoId    int64
-	UserId     int64
-	IsFavorite bool
+	VideoId int64 `gorm:"primary_key"`
+	UserId  int64 `gorm:"primary_key"`
 }
 type UserUserFollow struct {
-	Id       int64
+	Id       int64 `gorm:"primary_key"`
 	FansId   int64
 	IsFollow bool
 }
 type UserLogin struct {
-	Id       int64
+	Id       int64 `gorm:"primary_key"`
 	Name     string
 	Password string
 }

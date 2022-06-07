@@ -52,18 +52,20 @@ func CheckUser(username, password string) (int64, error) {
 	if err != nil {
 		return -1, err
 	}
-	fmt.Printf("61:%+v\n", userlogin)
+
 	return userlogin.Id, nil
 }
 
-func GetUser(name, token string, id int64) (bool, error) {
+func GetUser(name, token string, id int64) (User, error) {
 	var user User
 	err := db.Where(&User{Id: id, Name: name}).First(&user).Error
 	if err != nil {
-		return false, err
+		return user, err
 	}
 	usersLoginInfo[token] = user
-	return true, nil
+
+	fmt.Printf("%#v\n", usersLoginInfo)
+	return user, nil
 }
 
 //用户注册
@@ -84,9 +86,9 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	CanLogin, err := GetUser(username, token, id)
+	_, err = GetUser(username, token, id)
 
-	if !CanLogin || err != nil {
+	if err != nil {
 		c.JSON(http.StatusOK, UserLoginResponse{
 			Response: Response{StatusCode: 1, StatusMsg: "User regist error"},
 		})
@@ -141,9 +143,9 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	CanLogin, err := GetUser(username, token, id)
+	_, err = GetUser(username, token, id)
 
-	if !CanLogin || err != nil {
+	if err != nil {
 		c.JSON(http.StatusOK, UserLoginResponse{
 			Response: Response{StatusCode: 1, StatusMsg: "User logining error"},
 		})

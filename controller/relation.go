@@ -11,7 +11,9 @@ type UserListResponse struct {
 	UserList []User `json:"user_list"`
 }
 
-var usersRelationInfo = map[string]User{}
+func RelationInit() {
+
+}
 
 // RelationAction no practical effect, just check if token is valid
 // 没有实用效果，只检查token令牌是否合法

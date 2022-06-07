@@ -1,16 +1,28 @@
 package controller
 
 var DemoVideos = []Video{
-	{
-		Id:            1,
-		Author:        DemoUser,
-		PlayUrl:       "http://10.196.113.61:8080/static/bear.mp4",
-		CoverUrl:      "https://cdn.pixabay.com/photo/2016/03/27/18/10/bear-1283347_1280.jpg",
-		FavoriteCount: 0,
-		CommentCount:  0,
-		IsFavorite:    false,
-	},
+	// {
+	// 	Id:            1,
+	// 	Author:        DemoUser,
+	// 	PlayUrl:       "http://10.196.113.61/static/bear.mp4",
+	// 	CoverUrl:      "https://cdn.pixabay.com/photo/2016/03/27/18/10/bear-1283347_1280.jpg",
+	// 	FavoriteCount: 0,
+	// 	CommentCount:  0,
+	// 	IsFavorite:    false,
+	// }, {
+	// 	Id:            2,
+	// 	Author:        DemoUser,
+	// 	PlayUrl:       "http://10.196.113.61/static/game.mp4",
+	// 	CoverUrl:      "https://cdn.pixabay.com/photo/2016/03/27/18/10/bear-1283347_1280.jpg",
+	// 	FavoriteCount: 0,
+	// 	CommentCount:  0,
+	// 	IsFavorite:    false,
+	// },
 }
+var DmeoUserVideo = []Video{}
+var FavoUserVideo = []Video{}
+var FavoUserVideoList = []UserVideoFavorite{}
+var PublUserVideo = []Video{}
 
 var DemoComments = []Comment{
 	{
@@ -24,7 +36,7 @@ var DemoComments = []Comment{
 var DemoUser = User{
 	Id:            1,
 	Name:          "TestUser",
-	FollowCount:   0,
-	FollowerCount: 0,
+	FollowCount:   10,
+	FollowerCount: 5,
 	IsFollow:      false,
 }
