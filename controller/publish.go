@@ -79,12 +79,7 @@ func Publish(c *gin.Context) {
 func PublishList(c *gin.Context) {
 	token := c.Query("token")
 
-	fmt.Printf("token:%v\n", token)
-
 	user, exist := usersLoginInfo[token]
-
-	fmt.Println(usersLoginInfo[token])
-	fmt.Println(exist)
 
 	if !exist {
 		c.JSON(http.StatusOK, VideoListResponse{
@@ -104,4 +99,5 @@ func PublishList(c *gin.Context) {
 		},
 		VideoList: PublUserVideo,
 	})
+	fmt.Println(DemoVideos)
 }

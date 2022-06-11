@@ -16,8 +16,10 @@ type Video struct {
 	IsFavorite    bool   `json:"is_favorite,omitempty"`
 }
 type Comment struct {
-	Id         int64  `json:"id,omitempty" gorm:"primary_key"`
-	User       User   `json:"user" gorm:"foreignKey:id;references:id;"`
+	Id         int64 `json:"id,omitempty" gorm:"primary_key"`
+	VideoId    int64
+	UserId     int64  `json:"user_id,omitempty" `
+	User       User   `json:"user" gorm:"foreignKey:UserId;references:id;"`
 	Content    string `json:"content,omitempty"`
 	CreateDate string `json:"create_date,omitempty"`
 }
@@ -29,13 +31,13 @@ type User struct {
 	IsFollow      bool   `json:"is_follow,omitempty"`
 }
 type UserVideoFavorite struct {
-	VideoId int64 `gorm:"primary_key"`
-	UserId  int64 `gorm:"primary_key"`
+	VideoId    int64 `gorm:"primary_key"`
+	UserId     int64 `gorm:"primary_key"`
+	IsFavorite bool  `json:"is_favorite,omitempty"`
 }
 type UserUserFollow struct {
-	Id       int64 `gorm:"primary_key"`
-	FansId   int64
-	IsFollow bool
+	Id     int64 `gorm:"primary_key"`
+	FansId int64 `gorm:"primary_key"`
 }
 type UserLogin struct {
 	Id       int64 `gorm:"primary_key"`

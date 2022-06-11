@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/RaymondCode/simple-demo/pkg/util"
@@ -64,7 +63,6 @@ func GetUser(name, token string, id int64) (User, error) {
 	}
 	usersLoginInfo[token] = user
 
-	fmt.Printf("%#v\n", usersLoginInfo)
 	return user, nil
 }
 
@@ -101,23 +99,7 @@ func Register(c *gin.Context) {
 		})
 	}
 
-	// if _, exist := usersLoginInfo[token]; exist {
-	// 	c.JSON(http.StatusOK, UserLoginResponse{
-	// 		Response: Response{StatusCode: 1, StatusMsg: "User already exist"},
-	// 	})
-	// } else {
-	// 	atomic.AddInt64(&userIdSequence, 1)
-	// 	newUser := User{
-	// 		Id:   userIdSequence,
-	// 		Name: username,
-	// 	}
-	// 	usersLoginInfo[token] = newUser
-	// 	c.JSON(http.StatusOK, UserLoginResponse{
-	// 		Response: Response{StatusCode: 0},
-	// 		UserId:   userIdSequence,
-	// 		Token:    username + "&" + password,
-	// 	})
-	// }
+	GetAllVideos(c)
 }
 
 //用户登录
@@ -157,6 +139,8 @@ func Login(c *gin.Context) {
 			Token:    token,
 		})
 	}
+
+	GetAllVideos(c)
 }
 
 func UserInfo(c *gin.Context) {

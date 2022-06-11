@@ -13,9 +13,11 @@ type Response struct {
 
 func init() {
 	settings.Setup()
+	controller.Setup()
+	controller.GetAllVideos(&gin.Context{})
 }
 func main() {
-	controller.Setup()
+
 	r := gin.Default()
 
 	initRouter(r)

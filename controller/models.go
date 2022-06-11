@@ -45,11 +45,16 @@ func Setup() {
 	sqlDB.SetMaxIdleConns(settings.DatabaseSetting.MaxIdleConn)
 	sqlDB.SetMaxOpenConns(settings.DatabaseSetting.MaxOpenConn)
 
+	db.Model(&Video{}).Update("is_favorite", 0)
 	// var video []Video
 
 	// db.Preload(clause.Associations).Find(&video)
 
 	// fmt.Printf("%+v\n", video)
 
-	// db.AutoMigrate(&Video{})
+	// db.AutoMigrate(&Comment{})
+
+	// db.Preload(clause.Associations).Where("video_id = ?", 1).Find(&DemoComments)
+
+	// fmt.Printf("%+v", DemoComments)
 }

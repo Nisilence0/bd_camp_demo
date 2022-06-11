@@ -1,9 +1,10 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type FeedResponse struct {
@@ -15,9 +16,13 @@ type FeedResponse struct {
 // Feed same demo video list for every request
 // 视频流相同项目视频列表的每一个请求
 func Feed(c *gin.Context) {
+
+	GetAllVideos(c)
+
 	c.JSON(http.StatusOK, FeedResponse{
 		Response:  Response{StatusCode: 0},
 		VideoList: DemoVideos,
 		NextTime:  time.Now().Unix(),
 	})
+
 }
