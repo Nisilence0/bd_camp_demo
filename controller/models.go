@@ -12,6 +12,7 @@ import (
 var db *gorm.DB
 
 // Setup initializes the database instance
+//设置初始化数据库
 func Setup() {
 
 	var err error
@@ -45,16 +46,4 @@ func Setup() {
 	sqlDB.SetMaxIdleConns(settings.DatabaseSetting.MaxIdleConn)
 	sqlDB.SetMaxOpenConns(settings.DatabaseSetting.MaxOpenConn)
 
-	db.Model(&Video{}).Update("is_favorite", 0)
-	// var video []Video
-
-	// db.Preload(clause.Associations).Find(&video)
-
-	// fmt.Printf("%+v\n", video)
-
-	// db.AutoMigrate(&Comment{})
-
-	// db.Preload(clause.Associations).Where("video_id = ?", 1).Find(&DemoComments)
-
-	// fmt.Printf("%+v", DemoComments)
 }

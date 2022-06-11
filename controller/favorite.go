@@ -8,8 +8,19 @@ import (
 	"gorm.io/gorm"
 )
 
+//清除当前视频已点赞
+func ClearVideoFavorite() (bool, error) {
+
+	if err := db.Model(&Video{}).Where("is_favorite = ?", 1).Update("is_favorite", 0).Error; err != nil {
+		return false, err
+	}
+
+	return true, nil
+
+}
+
 // FavoriteAction no practical effect, just check if token is valid
-// FavoriteAction无实际效果，只需检查令牌是否有效
+//储存用户点赞视频
 func SaveUserFavoriteVideo(user User, video_id int64) (bool, error) {
 
 	if err := db.Create(&UserVideoFavorite{UserId: user.Id, VideoId: video_id, IsFavorite: true}).Error; err != nil {
@@ -19,6 +30,8 @@ func SaveUserFavoriteVideo(user User, video_id int64) (bool, error) {
 
 	return true, nil
 }
+
+//删除用户点赞视频
 func DeleteUserFavoriteVideo(user User, video_id int64) (bool, error) {
 
 	if err := db.Where("user_id = ?  and video_id = ?", user.Id, video_id).Delete(&UserVideoFavorite{}).Error; err != nil {
@@ -29,6 +42,8 @@ func DeleteUserFavoriteVideo(user User, video_id int64) (bool, error) {
 
 	return true, nil
 }
+
+//点赞操作
 func FavoriteAction(c *gin.Context) {
 
 	token := c.Query("token")
@@ -53,7 +68,7 @@ func FavoriteAction(c *gin.Context) {
 }
 
 // FavoriteList all users have same favorite video list
-// Favoritelist 所有用户都有相同的喜爱视频列表
+//点赞视频列表
 func FavoriteList(c *gin.Context) {
 
 	token := c.Query("token")
@@ -73,7 +88,7 @@ func FavoriteList(c *gin.Context) {
 
 }
 
-//实现点赞视频查找
+//查找点赞视频
 func SearchUserFavorVideo(user User) (bool, error) {
 
 	//先查找出在用户点赞过的视频id，再通过视频id找到视频。

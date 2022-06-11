@@ -19,6 +19,8 @@ func Feed(c *gin.Context) {
 
 	GetAllVideos(c)
 
+	ClearUserFollow()
+
 	c.JSON(http.StatusOK, FeedResponse{
 		Response:  Response{StatusCode: 0},
 		VideoList: DemoVideos,

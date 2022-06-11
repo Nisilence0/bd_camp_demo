@@ -6,14 +6,12 @@ import (
 )
 
 func GetAllVideos(c *gin.Context) (bool, error) {
-	
-	db.Model(&Video{}).Where("is_favorite = ?", 1).Update("is_favorite", 0)
+
+	ClearVideoFavorite()
 
 	token := c.Query("token")
 
 	if user, exist := usersLoginInfo[token]; exist {
-
-		db.Model(&Video{}).Update("is_favorite", 0)
 
 		err := db.Model(&Video{}).Where("id in (?)", db.Where("user_id = ?", user.Id).Select("video_id").Find(&FavoUserVideoList)).Update("is_favorite", true).Error
 

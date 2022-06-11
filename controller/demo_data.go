@@ -12,8 +12,10 @@ var DemoVideos = []Video{
 	// }
 }
 var DmeoUserVideo = []Video{}
+
 var FavoUserVideo = []Video{}
 var FavoUserVideoList = []UserVideoFavorite{}
+
 var PublUserVideo = []Video{}
 
 var UserFollowerIdList = []UserUserFollow{}

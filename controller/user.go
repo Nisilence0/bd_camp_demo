@@ -12,8 +12,6 @@ import (
 // test data: username=zhanglei, password=douyin
 var usersLoginInfo = map[string]User{}
 
-var userIdSequence = int64(1)
-
 type UserLoginResponse struct {
 	Response
 	UserId int64  `json:"user_id,omitempty"`
@@ -27,7 +25,6 @@ type UserResponse struct {
 
 //Create a new User and save User information
 //创建一个新的用户，并保存用户信息
-
 func CreateUser(username, password string) (int64, error) {
 
 	if err := db.Create(&UserLogin{Name: username, Password: password}).Error; err != nil {
@@ -44,6 +41,7 @@ func CreateUser(username, password string) (int64, error) {
 	return user.Id, nil
 }
 
+//查看用户是存在
 func CheckUser(username, password string) (int64, error) {
 
 	var userlogin UserLogin
@@ -55,6 +53,7 @@ func CheckUser(username, password string) (int64, error) {
 	return userlogin.Id, nil
 }
 
+//获取用户信息
 func GetUser(name, token string, id int64) (User, error) {
 	var user User
 	err := db.Where(&User{Id: id, Name: name}).First(&user).Error
@@ -143,6 +142,7 @@ func Login(c *gin.Context) {
 	GetAllVideos(c)
 }
 
+//用户信息返回
 func UserInfo(c *gin.Context) {
 	token := c.Query("token")
 

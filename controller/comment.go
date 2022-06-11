@@ -20,6 +20,7 @@ type CommentActionResponse struct {
 	Comment Comment `json:"comment,omitempty"`
 }
 
+//储存评论
 func SaveComment(user User, video_id int64, text, formatTimeStr string) (bool, error) {
 
 	if err := db.Create(&Comment{UserId: user.Id, VideoId: video_id, Content: text, CreateDate: formatTimeStr}).Error; err != nil {
@@ -31,6 +32,7 @@ func SaveComment(user User, video_id int64, text, formatTimeStr string) (bool, e
 	return true, nil
 }
 
+//查找不同视频的评论
 func SearchComment(video_id string) (bool, error) {
 
 	if err := db.Preload(clause.Associations).Where("video_id = ?", video_id).Find(&DemoComments).Error; err != nil {
@@ -42,6 +44,7 @@ func SearchComment(video_id string) (bool, error) {
 }
 
 // CommentAction no practical effect, just check if token is valid
+//评论行为
 func CommentAction(c *gin.Context) {
 
 	token := c.Query("token")
@@ -51,7 +54,7 @@ func CommentAction(c *gin.Context) {
 
 	if user, exist := usersLoginInfo[token]; exist {
 		if actionType == "1" {
-			
+
 			timeUnix := time.Now().Unix() //已知的时间戳
 			formatTimeStr := time.Unix(timeUnix, 0).Format("2006-01-02 15:04:05")
 			SaveComment(usersLoginInfo[token], (int64)(video_id), text, formatTimeStr)
@@ -64,6 +67,8 @@ func CommentAction(c *gin.Context) {
 					CreateDate: formatTimeStr,
 				}})
 			return
+		} else {
+
 		}
 		c.JSON(http.StatusOK, Response{StatusCode: 0})
 	} else {
@@ -72,6 +77,7 @@ func CommentAction(c *gin.Context) {
 }
 
 // CommentList all videos have same demo comment list
+//评论列表
 func CommentList(c *gin.Context) {
 	video_id := c.Query("video_id")
 
