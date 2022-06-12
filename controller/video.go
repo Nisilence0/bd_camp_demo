@@ -5,6 +5,7 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+//获取以用户点赞为基准的视频列表
 func GetAllVideos(c *gin.Context) (bool, error) {
 
 	ClearVideoFavorite()
@@ -30,6 +31,7 @@ func GetAllVideos(c *gin.Context) (bool, error) {
 	return true, nil
 }
 
+//获取视频列表
 func GetAllVideos2() (bool, error) {
 
 	err := db.Preload(clause.Associations).Find(&DemoVideos).Error
@@ -41,24 +43,12 @@ func GetAllVideos2() (bool, error) {
 	return true, nil
 }
 
-func GetVideosCount() (int64, error) {
-
-	var count int64
-
-	err := db.Preload(clause.Associations).Find(&DemoVideos).Count(&count).Error
-
-	if err != nil {
-		return -1, err
-	}
-	return count, nil
-
-}
-
+//用户上传视频
 func AddVideos(user User, playurl string) (bool, error) {
 
 	err := db.Create(&Video{
 		UserId:        user.Id,
-		PlayUrl:       playurl,
+		PlayUrl:       "http://150.158.197.247:80/public/" + playurl,
 		CoverUrl:      "http://150.158.197.247:80/public/cover.jpg",
 		FavoriteCount: 0,
 		CommentCount:  0,
@@ -77,6 +67,7 @@ func AddVideos(user User, playurl string) (bool, error) {
 	return true, nil
 }
 
+//查找用户发表的视频
 func SearchUserVideo(user User) (bool, error) {
 
 	err3 := db.Where("user_id = ?", user.Id).Find(&PublUserVideo).Error

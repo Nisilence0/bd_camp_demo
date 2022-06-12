@@ -13,19 +13,6 @@ type VideoListResponse struct {
 	VideoList []Video `json:"video_list"`
 }
 
-// var DemoVideos = []Video{}
-
-func VideoInit(c *gin.Context) {
-
-	token := c.PostForm("token")
-
-	if _, exist := usersLoginInfo[token]; !exist {
-		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "User doesn't login"})
-		return
-	}
-
-}
-
 // Publish check token then save upload file to public directory
 // 上传保存视频文件到公共文件夹只需要检查token是否合法
 func Publish(c *gin.Context) {
@@ -58,7 +45,7 @@ func Publish(c *gin.Context) {
 		return
 	}
 
-	_, err = AddVideos(user, saveFile)
+	_, err = AddVideos(user, finalName)
 	if err != nil {
 		c.JSON(http.StatusOK, Response{
 			StatusCode: 1,

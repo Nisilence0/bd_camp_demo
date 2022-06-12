@@ -27,6 +27,7 @@ func SaveComment(user User, video_id int64, text, formatTimeStr string) (bool, e
 		return false, err
 	}
 
+	//当评论增加时，使得视频评论个数整体数+1
 	db.Model(&Video{}).Where("id = ?", video_id).Update("comment_count", gorm.Expr("comment_count + ?", 1))
 
 	return true, nil

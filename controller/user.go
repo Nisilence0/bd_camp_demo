@@ -67,8 +67,9 @@ func GetUser(name, token string, id int64) (User, error) {
 
 //用户注册
 func Register(c *gin.Context) {
+
 	username := c.Query("username")
-	password := util.EncodeMD5(c.Query("password"))
+	password := util.EncodeMD5(c.Query("password")) //密码采用MD5不可逆加密方法
 	var token string
 	var id int64
 
@@ -116,7 +117,9 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	//检查用户是否存在及密码是否错误
 	id, err := CheckUser(username, password)
+
 	if err != nil {
 		c.JSON(http.StatusOK, UserLoginResponse{
 			Response: Response{StatusCode: 1, StatusMsg: "Username or Password is error"},
@@ -124,6 +127,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	//获取用户信息
 	_, err = GetUser(username, token, id)
 
 	if err != nil {
