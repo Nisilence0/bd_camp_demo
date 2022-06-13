@@ -31,7 +31,7 @@ func CreateUser(username, password string) (int64, error) {
 		return -1, err
 	}
 
-	if err := db.Create(&User{Name: username}).Error; err != nil {
+	if err := db.Create(&User{Name: username, Avatar: "http://150.158.197.247:80/public/avatar.png", BackgroundImage: "http://150.158.197.247:80/public/cover.jpg"}).Error; err != nil {
 		return -1, err
 	}
 	var user User
