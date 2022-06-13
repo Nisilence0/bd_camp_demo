@@ -1,6 +1,4 @@
-# simple-demo
-
-## 抖音项目服务端简单示例
+## 抖音项目服务端
 
 具体功能内容参考飞书说明文档
 
@@ -29,5 +27,6 @@
 
 ## 使用说明
 APK：https://bytedance.feishu.cn/docs/doccnM9KkBAdyDhg8qaeGlIz7S7#quPkfu
+
 下载相应的APK，并在高级设置中设置BaseUrl为http://150.158.197.247:8080 保存并重启，
 目前代码程序已部署在了相应的云服务器上。
